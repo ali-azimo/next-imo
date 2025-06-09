@@ -14,7 +14,7 @@ export const connect = async () =>{
     try{
         await mongoose.connect(process.env.MONGODB_URI, {
             dbName: "next-imo",
-            //userNewUrlParser: true,
+            userNewUrlParser: true,
             useUnifiedTopology: true,
         });
         inicializar = true;
