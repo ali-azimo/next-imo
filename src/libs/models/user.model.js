@@ -1,6 +1,5 @@
-import { User } from "@clerk/nextjs";
+import { User } from "@clerk/nextjs/dist/types/server";
 import mongoose from "mongoose";
-
 
 const userSchema = new mongoose.Schema(
     {
@@ -31,4 +30,4 @@ const userSchema = new mongoose.Schema(
 
 });
 const user = mongoose.models.User || mongoose.model('User', userSchema);
-export default User;
+export default User
