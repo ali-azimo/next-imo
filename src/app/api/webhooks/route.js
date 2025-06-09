@@ -71,12 +71,12 @@ export async function POST(req) {
             },
           });
         } catch (error) {
-          console.log('Error: Could not update user metadata:', error);
+          console.log('Erro: Nao foi possiivel criar o usuario', error);
         }
       }
     } catch (error) {
-      console.log('Error: Could not create or update user:', error);
-      return new Response('Error: Could not create or update user', {
+      console.log('Erro: Nao foi possiivel criar o usuario:', error);
+      return new Response('Erro: Nao foi possiivel criar o usuario', {
         status: 400,
       });
     }
@@ -86,8 +86,8 @@ export async function POST(req) {
     try {
       await deleteUser(id);
     } catch (error) {
-      console.log('Error: Could not delete user:', error);
-      return new Response('Error: Could not delete user', {
+      console.log('Erro: Impossivel apagar usuario:', error);
+      return new Response('Erro: Impossivel apagar usuario:', {
         status: 400,
       });
     }
