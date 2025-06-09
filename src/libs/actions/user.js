@@ -1,4 +1,4 @@
-import User from '../models/user.model.js';
+import User from '@/libs/models/user.model';
 
 import {connect} from '../mongodb/mongoose';
 
