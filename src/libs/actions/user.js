@@ -1,43 +1,39 @@
-import User from '@/libs/models/user.model';
-import {connect} from '../mongodb/mongoose';
+import User from '../models/user.model';
 
-export const creatOrUpdateUser = async(
-    id,
-    first_name,
-    last_name,
-    image_url,
-    email_addresses
-) =>{
-    try{
-        await connect();
-        const user = await User.findOneAndUpdate(
-            {clerkId: id},
-            {
-                $set:{
-                    firstNmae: first_name,
-                    lastName: last_name,
-                    profilePiture: image_url,
-                    email: email_addresses[0].email_address,
-                },
-            }, {upsert: true, new:true}
-        );
-        return user;
-    }catch(error){
-        console.log("Erro: Ipossivel aactualizar e criar usuario", error);
-    }
+import { connect } from '../mongodb/mongoose';
+
+export const createOrUpdateUser = async (
+  id,
+  first_name,
+  last_name,
+  image_url,
+  email_addresses
+) => {
+  try {
+    await connect();
+    const user = await User.findOneAndUpdate(
+      { clerkId: id },
+      {
+        $set: {
+          firstName: first_name,
+          lastName: last_name,
+          profilePicture: image_url,
+          email: email_addresses[0].email_address,
+        },
+      },
+      { upsert: true, new: true }
+    );
+    return user;
+  } catch (error) {
+    console.log('Erro: Nao foi possivel criar ou actualizar usuario:', error);
+  }
 };
 
-//APAGAR USUARIO
-
-export const deleteUser = async (id) =>{
-    try{
-        await connect();
-        const user = await User.findOneAndDelete( {clerkId: id});
-    }catch(error){
-        console.log("Erro: Ipossivel apagar usuario", error);
-    }
+export const deleteUser = async (id) => {
+  try {
+    await connect();
+    await User.findOneAndDelete({ clerkId: id });
+  } catch (error) {
+    console.log('Erro: Nao foi possivel apagar usuario', error);
+  }
 };
-
-
-
-

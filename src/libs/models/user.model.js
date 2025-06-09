@@ -1,33 +1,33 @@
-import { User } from "@clerk/nextjs/dist/types/server";
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
-    {
-    clerrkId: {
-        type: String,
-        required: true,
-        unique: true,
+  {
+    clerkId: {
+      type: String,
+      required: true,
+      unique: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
+      unique: true,
     },
     firstName: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     lastName: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    profiPituture: {
-        type: String,
-        required: true,
+    profilePicture: {
+      type: String,
+      required: true,
     },
-}, {
-      timestamps: true, 
+  },
+  { timestamps: true }
+);
 
-});
-const user = mongoose.models.User || mongoose.model('User', userSchema);
-export default User
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+
+export default User;
