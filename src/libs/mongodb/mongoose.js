@@ -1,24 +1,25 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-let initialized = false;
 
-export const connect = async () => {
-  mongoose.set('strictQuery', true);
+let inicializar = false;
 
-  if (initialized) {
-    console.log('MongoDB already connected');
-    return;
-  }
+export const connect = async () =>{
+    mongoose.set('strictQuery', true);
 
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: 'next-imo',
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    initialized = true;
-    console.log('MongoDB connected');
-  } catch (error) {
-    console.log('MongoDB connection error:', error);
-  }
+
+    if(inicializar){
+        console.log('MongoDb inicializado');
+        return;
+    }
+    try{
+        await mongoose.connect(process.env.MONGODB_URI, {
+            dbName: 'next-imo',
+            userNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        inicializar = true;
+        console.log("Contacto com MongoDB");
+    }catch (error){
+        console.log("Erro ao conectar com MongoDB", error)
+    }
 };
