@@ -1,24 +1,24 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
+let initialized = false;
 
-let inicializar = false;
+export const connect = async () => {
+  mongoose.set('strictQuery', true);
 
-export const connect = async () =>{
-    mongoose.set('strictPopulate', true);
+  if (initialized) {
+    console.log('MongoDB already connected');
+    return;
+  }
 
-
-    if(inicializar){
-        console.log('MongoDb inicializado com sucesso');
-        return;
-    }
-    try{
-        await mongoose.connect(process.env.MONGODB_URL, {
-            dbName: 'next-imo',
-            userNewUrlParser: true,
-        });
-        inicializar = true;
-        console.log("Contaacto como MongoDB");
-    }catch (error){
-        console.log("Erro ao conectar com MongoDB", error)
-    }
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: 'next-imo',
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    initialized = true;
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.log('MongoDB connection error:', error);
+  }
 };
